@@ -8,5 +8,7 @@
 //! ```
 
 mod error;
+mod frame;
 
+pub use crate::frame::FrameKind;
 pub use crate::error::{Error, ErrorKind, Result};
