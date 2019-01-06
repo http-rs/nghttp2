@@ -11,5 +11,8 @@ mod error;
 pub mod frames;
 mod settings;
 
+/// The Stream identifier.
+pub type StreamId = i32;
+
 pub use crate::error::{Error, ErrorKind, Result};
 pub use crate::settings::SettingsKind;
