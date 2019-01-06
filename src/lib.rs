@@ -8,9 +8,8 @@
 //! ```
 
 mod error;
-mod frame;
+pub mod frames;
 mod settings;
 
-pub use crate::settings::SettingsKind;
 pub use crate::error::{Error, ErrorKind, Result};
-pub use crate::frame::FrameKind;
+pub use crate::settings::SettingsKind;

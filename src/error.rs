@@ -245,9 +245,6 @@ impl Error {
       libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
         ErrorKind::InvalidArgument
       }
-      libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
-        ErrorKind::InvalidArgument
-      }
       libnghttp2_sys::NGHTTP2_ERR_BAD_CLIENT_MAGIC => ErrorKind::BadClientMagic,
       libnghttp2_sys::NGHTTP2_ERR_BUFFER_ERROR => ErrorKind::BufferError,
       libnghttp2_sys::NGHTTP2_ERR_CALLBACK_FAILURE => {
