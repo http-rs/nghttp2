@@ -33,7 +33,7 @@ pub enum FrameKind {
   Altsvc,
   /// The ORIGIN frame, which is defined by [`RFC 8336`].
   ///
-  /// [`RFC 8336`]: https://tools.ietf.org/html/rfc8336>.
+  /// [`RFC 8336`]: https://tools.ietf.org/html/rfc8336.
   Origin,
 }
 
@@ -72,7 +72,6 @@ impl FrameKind {
       FrameKind::Continuation => libnghttp2_sys::NGHTTP2_CONTINUATION,
       FrameKind::Altsvc => libnghttp2_sys::NGHTTP2_ALTSVC,
       FrameKind::Origin => libnghttp2_sys::NGHTTP2_ORIGIN,
-      _ => unreachable!(),
     }
   }
 }
