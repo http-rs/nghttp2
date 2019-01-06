@@ -9,6 +9,8 @@
 
 mod error;
 mod frame;
+mod settings;
 
+pub use crate::settings::SettingsKind;
 pub use crate::error::{Error, ErrorKind, Result};
 pub use crate::frame::FrameKind;
