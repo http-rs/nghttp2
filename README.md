@@ -20,8 +20,7 @@ $ cargo add nghttp2
 ```
 
 ## Safety
-This crate uses ``#![deny(unsafe_code)]`` to ensure everything is implemented in
-100% Safe Rust.
+This crate provides safe bindings to the `libnghttp2` C library.
 
 ## Contributing
 Want to join us? Check out our ["Contributing" guide][contributing] and take a
