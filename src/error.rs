@@ -240,7 +240,7 @@ impl Error {
     &*self.inner.get_context()
   }
 
-  fn from_error_code(error_code: nghttp2_error) -> Self {
+  fn from_sys(error_code: nghttp2_error) -> Self {
     let kind = match error_code {
       libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
         ErrorKind::InvalidArgument

@@ -39,7 +39,7 @@ pub enum FrameKind {
 
 impl FrameKind {
   #[inline]
-  fn from_nghttp2(frame_type: nghttp2_frame_type) -> Self {
+  fn from_sys(frame_type: nghttp2_frame_type) -> Self {
     match frame_type {
       libnghttp2_sys::NGHTTP2_DATA => FrameKind::Data,
       libnghttp2_sys::NGHTTP2_HEADERS => FrameKind::Headers,
@@ -58,7 +58,7 @@ impl FrameKind {
   }
 
   #[inline]
-  fn into_nghttp2(self) -> nghttp2_frame_type {
+  fn into_sys(self) -> nghttp2_frame_type {
     match self {
       FrameKind::Data => libnghttp2_sys::NGHTTP2_DATA,
       FrameKind::Headers => libnghttp2_sys::NGHTTP2_HEADERS,
