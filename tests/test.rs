@@ -1,5 +1,5 @@
-extern crate nghttp2;
 extern crate failure;
+extern crate nghttp2;
 
 use failure::Error;
 

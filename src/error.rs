@@ -2,6 +2,8 @@ use failure::{self, Backtrace, Context, Fail};
 use std::fmt::{self, Display};
 use std::result;
 
+use libnghttp2_sys::nghttp2_error;
+
 /// A specialized [`Result`] type for this crate's operations.
 ///
 /// This is generally used to avoid writing out [Error] directly and
@@ -236,6 +238,86 @@ impl Error {
   /// [`ErrorKind`]: enum.ErrorKind.html
   pub fn kind(&self) -> &ErrorKind {
     &*self.inner.get_context()
+  }
+
+  fn from_error_code(error_code: nghttp2_error) -> Self {
+    let kind = match error_code {
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
+        ErrorKind::InvalidArgument
+      }
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
+        ErrorKind::InvalidArgument
+      }
+      libnghttp2_sys::NGHTTP2_ERR_BAD_CLIENT_MAGIC => ErrorKind::BadClientMagic,
+      libnghttp2_sys::NGHTTP2_ERR_BUFFER_ERROR => ErrorKind::BufferError,
+      libnghttp2_sys::NGHTTP2_ERR_CALLBACK_FAILURE => {
+        ErrorKind::CallbackFailure
+      }
+      libnghttp2_sys::NGHTTP2_ERR_CANCEL => ErrorKind::Cancel,
+      libnghttp2_sys::NGHTTP2_ERR_DATA_EXIST => ErrorKind::DataExist,
+      libnghttp2_sys::NGHTTP2_ERR_DEFERRED => ErrorKind::Deferred,
+      libnghttp2_sys::NGHTTP2_ERR_DEFERRED_DATA_EXIST => {
+        ErrorKind::DeferredDataExist
+      }
+      libnghttp2_sys::NGHTTP2_ERR_EOF => ErrorKind::Eof,
+      libnghttp2_sys::NGHTTP2_ERR_FATAL => ErrorKind::Fatal,
+      libnghttp2_sys::NGHTTP2_ERR_FLOODED => ErrorKind::Flooded,
+      libnghttp2_sys::NGHTTP2_ERR_FLOW_CONTROL => ErrorKind::FlowControl,
+      libnghttp2_sys::NGHTTP2_ERR_FRAME_SIZE_ERROR => ErrorKind::FrameSizeError,
+      libnghttp2_sys::NGHTTP2_ERR_GOAWAY_ALREADY_SENT => {
+        ErrorKind::GoawayAlreadySent
+      }
+      libnghttp2_sys::NGHTTP2_ERR_HEADER_COMP => ErrorKind::HeaderComp,
+      libnghttp2_sys::NGHTTP2_ERR_HTTP_HEADER => ErrorKind::HttpHeader,
+      libnghttp2_sys::NGHTTP2_ERR_HTTP_MESSAGING => ErrorKind::HttpMessaging,
+      libnghttp2_sys::NGHTTP2_ERR_INSUFF_BUFSIZE => ErrorKind::InsuffBufsize,
+      libnghttp2_sys::NGHTTP2_ERR_INTERNAL => ErrorKind::Internal,
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
+        ErrorKind::InvalidArgument
+      }
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_FRAME => ErrorKind::InvalidFrame,
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_HEADER_BLOCK => {
+        ErrorKind::InvalidHeaderBlock
+      }
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_STATE => ErrorKind::InvalidState,
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_STREAM_ID => {
+        ErrorKind::InvalidStreamId
+      }
+      libnghttp2_sys::NGHTTP2_ERR_INVALID_STREAM_STATE => {
+        ErrorKind::InvalidStreamState
+      }
+      libnghttp2_sys::NGHTTP2_ERR_NOMEM => ErrorKind::Nomem,
+      libnghttp2_sys::NGHTTP2_ERR_PAUSE => ErrorKind::Pause,
+      libnghttp2_sys::NGHTTP2_ERR_PROTO => ErrorKind::Proto,
+      libnghttp2_sys::NGHTTP2_ERR_PUSH_DISABLED => ErrorKind::PushDisabled,
+      libnghttp2_sys::NGHTTP2_ERR_REFUSED_STREAM => ErrorKind::RefusedStream,
+      libnghttp2_sys::NGHTTP2_ERR_SESSION_CLOSING => ErrorKind::SessionClosing,
+      libnghttp2_sys::NGHTTP2_ERR_SETTINGS_EXPECTED => {
+        ErrorKind::SettingsExpected
+      }
+      libnghttp2_sys::NGHTTP2_ERR_START_STREAM_NOT_ALLOWED => {
+        ErrorKind::StartStreamNotAllowed
+      }
+      libnghttp2_sys::NGHTTP2_ERR_STREAM_CLOSED => ErrorKind::StreamClosed,
+      libnghttp2_sys::NGHTTP2_ERR_STREAM_CLOSING => ErrorKind::StreamClosing,
+      libnghttp2_sys::NGHTTP2_ERR_STREAM_ID_NOT_AVAILABLE => {
+        ErrorKind::StreamIdNotAvailable
+      }
+      libnghttp2_sys::NGHTTP2_ERR_STREAM_SHUT_WR => ErrorKind::StreamShutWr,
+      libnghttp2_sys::NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE => {
+        ErrorKind::TemporalCallbackFailure
+      }
+      libnghttp2_sys::NGHTTP2_ERR_TOO_MANY_INFLIGHT_SETTINGS => {
+        ErrorKind::TooManyInflightSettings
+      }
+      libnghttp2_sys::NGHTTP2_ERR_UNSUPPORTED_VERSION => {
+        ErrorKind::UnsupportedVersion
+      }
+      libnghttp2_sys::NGHTTP2_ERR_WOULDBLOCK => ErrorKind::WouldBlock,
+      _ => unimplemented!(),
+    };
+    let inner = Context::new(kind);
+    Error { inner }
   }
 }
 
