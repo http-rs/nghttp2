@@ -9,8 +9,11 @@ keywords = ["http2", "h2", "parser", "duplex", "connection"]
 categories = ["asynchronous", "network-programming", "web-programming", "web-programming::http-client", "web-programming::http-server"]
 authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
 readme = "README.md"
+edition = "2018"
 
 [dependencies]
 failure = "0.1.3"
+libnghttp2-sys = "0.1.1"
+openssl = "0.10.16"
 
 [dev-dependencies]

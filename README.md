@@ -33,6 +33,7 @@ look at some of these issues:
 ## References
 - [nghttp2/nghttp2](https://github.com/nghttp2/nghttp2)
 - [alexcrichton/nghttp2-rs](https://github.com/alexcrichton/nghttp2-rs)
+- [libnghttp2 server tutorial](https://www.nghttp2.org/documentation/tutorial-server.html)
 
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
