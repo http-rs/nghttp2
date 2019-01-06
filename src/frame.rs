@@ -1,4 +1,5 @@
 use libnghttp2_sys::nghttp2_frame_type;
+use std::hint::unreachable_unchecked;
 
 /// The frame types in HTTP/2 specification.
 #[derive(Debug, Clone)]
@@ -53,7 +54,7 @@ impl FrameKind {
       libnghttp2_sys::NGHTTP2_CONTINUATION => FrameKind::Continuation,
       libnghttp2_sys::NGHTTP2_ALTSVC => FrameKind::Altsvc,
       libnghttp2_sys::NGHTTP2_ORIGIN => FrameKind::Origin,
-      _ => unreachable!(),
+      _ => unsafe { unreachable_unchecked() },
     }
   }
 
