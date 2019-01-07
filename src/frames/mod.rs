@@ -5,7 +5,9 @@ mod frame_header;
 mod frame_kind;
 mod headers_frame;
 mod frame_header_inflate_flags;
+mod frame_flag;
 
+pub use crate::frames::frame_flag::FrameFlag;
 pub use crate::frames::data_frame::DataFrame;
 pub use crate::frames::frame_header::FrameHeader;
 pub use crate::frames::frame_kind::FrameKind;
