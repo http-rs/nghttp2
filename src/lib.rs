@@ -7,20 +7,17 @@
 //! ```rust
 //! ```
 
-mod frames;
 mod error;
-mod settings;
+mod frames;
 mod name_value_flags;
+mod settings;
 mod stream;
-
-/// The Stream identifier.
-pub type StreamId = i32;
 
 /// The Settings identifier.
 pub type SettingsId = libnghttp2_sys::nghttp2_settings_id;
 
-pub use crate::name_value_flags::*;
-pub use crate::frames::*;
-pub use crate::stream::*;
 pub use crate::error::*;
+pub use crate::frames::*;
+pub use crate::name_value_flags::*;
 pub use crate::settings::*;
+pub use crate::stream::*;
