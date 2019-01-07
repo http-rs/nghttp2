@@ -2,7 +2,7 @@ use crate::StreamId;
 use libnghttp2_sys::nghttp2_frame_hd;
 
 /// Access the Header fields on a Frame.
-pub trait Header {
+pub trait FrameHeader {
   /// Access the header directly.
   fn header(&self) -> &nghttp2_frame_hd;
 

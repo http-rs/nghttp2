@@ -1,4 +1,4 @@
-use super::Header;
+use super::FrameHeader;
 
 /// The DATA frame
 #[derive(Debug, Clone)]
@@ -14,7 +14,7 @@ impl DataFrame {
   }
 }
 
-impl Header for DataFrame {
+impl FrameHeader for DataFrame {
   #[inline]
   fn header(&self) -> &libnghttp2_sys::nghttp2_frame_hd {
     &self.inner.hd

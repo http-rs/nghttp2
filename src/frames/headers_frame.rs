@@ -1,4 +1,4 @@
-use super::Header;
+use super::FrameHeader;
 
 /// The HEADERS frame.
 #[derive(Debug, Clone)]
@@ -30,7 +30,7 @@ impl HeadersFrame {
   }
 }
 
-impl Header for HeadersFrame {
+impl FrameHeader for HeadersFrame {
   #[inline]
   fn header(&self) -> &libnghttp2_sys::nghttp2_frame_hd {
     &self.inner.hd
