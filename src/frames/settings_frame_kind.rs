@@ -25,7 +25,9 @@ impl SettingsFrameKind {
       libnghttp2_sys::NGHTTP2_SETTINGS_HEADER_TABLE_SIZE => {
         SettingsFrameKind::HeaderTableSize
       }
-      libnghttp2_sys::NGHTTP2_SETTINGS_ENABLE_PUSH => SettingsFrameKind::EnablePush,
+      libnghttp2_sys::NGHTTP2_SETTINGS_ENABLE_PUSH => {
+        SettingsFrameKind::EnablePush
+      }
       libnghttp2_sys::NGHTTP2_SETTINGS_MAX_CONCURRENT_STREAMS => {
         SettingsFrameKind::MaxConcurrentStreams
       }
@@ -48,7 +50,9 @@ impl SettingsFrameKind {
       SettingsFrameKind::HeaderTableSize => {
         libnghttp2_sys::NGHTTP2_SETTINGS_HEADER_TABLE_SIZE
       }
-      SettingsFrameKind::EnablePush => libnghttp2_sys::NGHTTP2_SETTINGS_ENABLE_PUSH,
+      SettingsFrameKind::EnablePush => {
+        libnghttp2_sys::NGHTTP2_SETTINGS_ENABLE_PUSH
+      }
       SettingsFrameKind::MaxConcurrentStreams => {
         libnghttp2_sys::NGHTTP2_SETTINGS_MAX_CONCURRENT_STREAMS
       }

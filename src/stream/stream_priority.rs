@@ -1,6 +1,6 @@
+use super::StreamExclusivity;
 use super::StreamId;
 use libnghttp2_sys::nghttp2_priority_spec;
-use super::StreamExclusivity;
 
 /// The structure to specify stream dependency.
 #[derive(Debug, Clone)]

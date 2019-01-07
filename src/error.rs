@@ -239,8 +239,10 @@ impl Error {
   pub fn kind(&self) -> &ErrorKind {
     &*self.inner.get_context()
   }
+}
 
-  fn from_sys(error_code: nghttp2_error) -> Self {
+impl From<nghttp2_error> for Error {
+  fn from(error_code: nghttp2_error) -> Error {
     let kind = match error_code {
       libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
         ErrorKind::InvalidArgument
@@ -269,9 +271,6 @@ impl Error {
       libnghttp2_sys::NGHTTP2_ERR_HTTP_MESSAGING => ErrorKind::HttpMessaging,
       libnghttp2_sys::NGHTTP2_ERR_INSUFF_BUFSIZE => ErrorKind::InsuffBufsize,
       libnghttp2_sys::NGHTTP2_ERR_INTERNAL => ErrorKind::Internal,
-      libnghttp2_sys::NGHTTP2_ERR_INVALID_ARGUMENT => {
-        ErrorKind::InvalidArgument
-      }
       libnghttp2_sys::NGHTTP2_ERR_INVALID_FRAME => ErrorKind::InvalidFrame,
       libnghttp2_sys::NGHTTP2_ERR_INVALID_HEADER_BLOCK => {
         ErrorKind::InvalidHeaderBlock

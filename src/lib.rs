@@ -10,7 +10,7 @@
 mod error;
 mod frames;
 mod name_value_flags;
-mod settings;
+mod session;
 mod stream;
 
 /// The Settings identifier.
@@ -19,5 +19,5 @@ pub type SettingsId = libnghttp2_sys::nghttp2_settings_id;
 pub use crate::error::*;
 pub use crate::frames::*;
 pub use crate::name_value_flags::*;
-pub use crate::settings::*;
+pub use crate::session::*;
 pub use crate::stream::*;
