@@ -73,19 +73,25 @@ impl Session {
   /// Performs post-process of HTTP Upgrade request. This function can be called
   /// from both client and server, but the behavior is very different in each
   /// other.
+  // TODO: make safe
   pub unsafe fn upgrade(
     &mut self,
-    settings_payload: *const u8,
-    settings_payloadlen: usize,
-    head_request: std::os::raw::c_int,
+    settings_payload: &[u8],
+    is_head_request: bool,
     stream_user_data: *mut std::ffi::c_void,
   ) -> Result<(), crate::error::Error> {
-    // `nghttp2_session_upgrade` has been deprecated. Only use upgrade2.
+    let head_request = match is_head_request {
+      true => 0,
+      false => 1,
+    };
+
     let res = unsafe {
+      let payload_len = settings_payload.len();
+      let payload = settings_payload.as_ptr();
       libnghttp2_sys::nghttp2_session_upgrade2(
         &mut self.inner,
-        settings_payload,
-        settings_payloadlen,
+        payload,
+        payload_len,
         head_request,
         stream_user_data,
       )
