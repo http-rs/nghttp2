@@ -1,5 +1,4 @@
 use super::Header;
-use crate::StreamId;
 
 /// The DATA frame
 #[derive(Debug, Clone)]
@@ -17,13 +16,8 @@ impl DataFrame {
 
 impl Header for DataFrame {
   #[inline]
-  fn flags(&self) -> u8 {
-    self.inner.hd.flags
-  }
-
-  #[inline]
-  fn stream_id(&self) -> StreamId {
-    self.inner.hd.stream_id
+  fn header(&self) -> &libnghttp2_sys::nghttp2_frame_hd {
+    &self.inner.hd
   }
 }
 
