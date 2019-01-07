@@ -16,7 +16,7 @@ mod stream_state;
 pub type StreamId = i32;
 
 /// The Settings identifier.
-pub type SettingsId = i32;
+pub type SettingsId = libnghttp2_sys::nghttp2_settings_id;
 
 pub use crate::stream_state::StreamState;
 pub use crate::error::{Error, ErrorKind, Result};
