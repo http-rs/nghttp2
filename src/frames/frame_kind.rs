@@ -38,9 +38,10 @@ pub enum FrameKind {
   Origin,
 }
 
-impl FrameKind {
+#[doc(hidden)]
+impl From<nghttp2_frame_type> for FrameKind {
   #[inline]
-  fn from_sys(frame_type: nghttp2_frame_type) -> Self {
+  fn from(frame_type: nghttp2_frame_type) -> Self {
     match frame_type {
       libnghttp2_sys::NGHTTP2_DATA => FrameKind::Data,
       libnghttp2_sys::NGHTTP2_HEADERS => FrameKind::Headers,
@@ -57,9 +58,12 @@ impl FrameKind {
       _ => unsafe { unreachable_unchecked() },
     }
   }
+}
 
+#[doc(hidden)]
+impl Into<nghttp2_frame_type> for FrameKind {
   #[inline]
-  fn into_sys(self) -> nghttp2_frame_type {
+  fn into(self) -> nghttp2_frame_type {
     match self {
       FrameKind::Data => libnghttp2_sys::NGHTTP2_DATA,
       FrameKind::Headers => libnghttp2_sys::NGHTTP2_HEADERS,
