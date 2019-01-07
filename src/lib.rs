@@ -10,9 +10,14 @@
 mod error;
 pub mod frames;
 mod settings;
+mod stream_state;
 
 /// The Stream identifier.
 pub type StreamId = i32;
 
+/// The Settings identifier.
+pub type SettingsId = i32;
+
+pub use crate::stream_state::StreamState;
 pub use crate::error::{Error, ErrorKind, Result};
 pub use crate::settings::SettingsKind;
