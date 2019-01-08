@@ -160,6 +160,17 @@ impl Session {
       _ => true,
     }
   }
+
+  /// Returns the number of frames in the outbound queue. This does not include
+  /// the deferred DATA frames.
+  #[inline]
+  pub fn get_outbound_queue_size(
+    &mut self,
+  ) -> usize {
+    unsafe {
+      libnghttp2_sys::nghttp2_session_get_outbound_queue_size(&mut self.inner)
+    }
+  }
 }
 
 impl Drop for Session {
