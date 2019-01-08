@@ -112,6 +112,26 @@ impl Session {
       n => Err(n.into()),
     }
   }
+
+  /// Puts back previously deferred DATA frame in the stream `stream_id` to the
+  /// outbound queue.
+  ///
+  /// ## Errors
+  ///
+  /// NGHTTP2_ERR_INVALID_ARGUMENT The stream does not exist;
+  #[inline]
+  pub fn resume_data(
+    &mut self,
+    stream_id: StreamId,
+  ) -> Result<(), crate::error::Error> {
+    let res = unsafe {
+      libnghttp2_sys::nghttp2_session_resume_data(&mut self.inner, stream_id)
+    };
+    match res {
+      0 => Ok(()),
+      n => Err(n.into()),
+    }
+  }
 }
 
 impl Drop for Session {
