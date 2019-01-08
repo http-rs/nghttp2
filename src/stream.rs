@@ -26,3 +26,19 @@ impl Stream {
     }
   }
 }
+
+#[doc(hidden)]
+impl From<libnghttp2_sys::nghttp2_stream> for Stream {
+  #[inline]
+  fn from(inner: libnghttp2_sys::nghttp2_stream) -> Self {
+    Self { inner }
+  }
+}
+
+#[doc(hidden)]
+impl Into<libnghttp2_sys::nghttp2_stream> for Stream {
+  #[inline]
+  fn into(self) -> libnghttp2_sys::nghttp2_stream {
+    self.inner
+  }
+}
