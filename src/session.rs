@@ -1,5 +1,6 @@
 use crate::StreamId;
 use libnghttp2_sys::nghttp2_session;
+use crate::Stream;
 
 /// Session type.
 #[derive(Debug)]
@@ -81,19 +82,19 @@ impl Session {
   /// Performs post-process of HTTP Upgrade request. This function can be called
   /// from both client and server, but the behavior is very different in each
   /// other.
-  // TODO: return Option<StreamUserData>
+  // TODO: implement Some branch for stream_user_data pointer
   // TODO: create variants for both client and server
   pub fn upgrade(
     &mut self,
     settings_payload: &[u8],
     is_head_request: bool,
-  ) -> Result<(), crate::error::Error> {
+  ) -> Result<Option<&Stream>, crate::error::Error> {
     let head_request = match is_head_request {
       true => 0,
       false => 1,
     };
 
-    let stream_user_data = std::ptr::null_mut();
+    let stream_ptr = std::ptr::null_mut();
     let payload_len = settings_payload.len();
     let payload_ptr = settings_payload.as_ptr();
 
@@ -103,11 +104,11 @@ impl Session {
         payload_ptr,
         payload_len,
         head_request,
-        stream_user_data,
+        stream_ptr,
       )
     };
     match res {
-      0 => Ok(()),
+      0 => Ok(None),
       n => Err(n.into()),
     }
   }
