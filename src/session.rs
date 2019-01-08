@@ -132,6 +132,34 @@ impl Session {
       n => Err(n.into()),
     }
   }
+
+  /// Returns `true` if the session wants to receive data from the remote peer.
+  #[inline]
+  pub fn want_read(
+    &mut self,
+  ) -> bool {
+    let res = unsafe {
+      libnghttp2_sys::nghttp2_session_want_read(&mut self.inner)
+    };
+    match res {
+      0 => false,
+      _ => true,
+    }
+  }
+
+  /// Returns `true` if the session wants to send data to the remote peer.
+  #[inline]
+  pub fn want_write(
+    &mut self,
+  ) -> bool {
+    let res = unsafe {
+      libnghttp2_sys::nghttp2_session_want_write(&mut self.inner)
+    };
+    match res {
+      0 => false,
+      _ => true,
+    }
+  }
 }
 
 impl Drop for Session {
