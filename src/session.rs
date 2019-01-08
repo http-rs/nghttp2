@@ -8,6 +8,14 @@ pub struct Session {
 }
 
 impl Session {
+  /// Create a new instance.
+  #[inline]
+  pub fn new() -> Self {
+    Self {
+      inner: unsafe { std::mem::zeroed() },
+    }
+  }
+
   /// Receives frames from the remote peer.
   ///
   /// ## Errors
@@ -74,6 +82,7 @@ impl Session {
   /// from both client and server, but the behavior is very different in each
   /// other.
   // TODO: return Option<StreamUserData>
+  // TODO: create variants for both client and server
   pub fn upgrade(
     &mut self,
     settings_payload: &[u8],
