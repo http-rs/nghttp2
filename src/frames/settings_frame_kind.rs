@@ -18,9 +18,10 @@ pub enum SettingsFrameKind {
   MaxHeaderListSize,
 }
 
-impl SettingsFrameKind {
+#[doc(hidden)]
+impl From<nghttp2_settings_id> for SettingsFrameKind {
   #[inline]
-  fn from_sys(setting: nghttp2_settings_id) -> Self {
+  fn from(setting: nghttp2_settings_id) -> Self {
     match setting {
       libnghttp2_sys::NGHTTP2_SETTINGS_HEADER_TABLE_SIZE => {
         SettingsFrameKind::HeaderTableSize
@@ -43,9 +44,12 @@ impl SettingsFrameKind {
       _ => unsafe { unreachable_unchecked() },
     }
   }
+}
 
+#[doc(hidden)]
+impl Into<nghttp2_settings_id> for SettingsFrameKind {
   #[inline]
-  fn into_sys(self) -> nghttp2_settings_id {
+  fn into(self) -> nghttp2_settings_id {
     match self {
       SettingsFrameKind::HeaderTableSize => {
         libnghttp2_sys::NGHTTP2_SETTINGS_HEADER_TABLE_SIZE
