@@ -23,3 +23,10 @@ bitflags! {
     const Priority = libnghttp2_sys::NGHTTP2_FLAG_PRIORITY;
   }
 }
+
+impl Into<u8> for FrameFlag {
+  #[inline]
+  fn into(self) -> u8 {
+    self.bits as u8
+  }
+}

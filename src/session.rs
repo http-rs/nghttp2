@@ -1,6 +1,8 @@
+use crate::error::Error;
+use crate::Stream;
 use crate::StreamId;
 use libnghttp2_sys::nghttp2_session;
-use crate::Stream;
+use crate::FrameFlag;
 
 /// Session type.
 #[derive(Debug)]
@@ -135,12 +137,9 @@ impl Session {
 
   /// Returns `true` if the session wants to receive data from the remote peer.
   #[inline]
-  pub fn want_read(
-    &mut self,
-  ) -> bool {
-    let res = unsafe {
-      libnghttp2_sys::nghttp2_session_want_read(&mut self.inner)
-    };
+  pub fn want_read(&mut self) -> bool {
+    let res =
+      unsafe { libnghttp2_sys::nghttp2_session_want_read(&mut self.inner) };
     match res {
       0 => false,
       _ => true,
@@ -149,12 +148,9 @@ impl Session {
 
   /// Returns `true` if the session wants to send data to the remote peer.
   #[inline]
-  pub fn want_write(
-    &mut self,
-  ) -> bool {
-    let res = unsafe {
-      libnghttp2_sys::nghttp2_session_want_write(&mut self.inner)
-    };
+  pub fn want_write(&mut self) -> bool {
+    let res =
+      unsafe { libnghttp2_sys::nghttp2_session_want_write(&mut self.inner) };
     match res {
       0 => false,
       _ => true,
@@ -164,11 +160,26 @@ impl Session {
   /// Returns the number of frames in the outbound queue. This does not include
   /// the deferred DATA frames.
   #[inline]
-  pub fn get_outbound_queue_size(
-    &mut self,
-  ) -> usize {
+  pub fn get_outbound_queue_size(&mut self) -> usize {
     unsafe {
       libnghttp2_sys::nghttp2_session_get_outbound_queue_size(&mut self.inner)
+    }
+  }
+
+  /// Submit a settings frame.
+  pub fn submit_settings(
+    &mut self,
+    settings: &[libnghttp2_sys::nghttp2_settings_entry],
+  ) -> Result<(), Error> {
+    let flags = FrameFlag::None; // This is the only valid value.
+    let settings_len = settings.len();
+    let settings_ptr = settings.as_ptr();
+    let res = unsafe {
+      libnghttp2_sys::nghttp2_submit_settings(&mut self.inner, flags.into(), settings_ptr, settings_len)
+    };
+    match res {
+      0 => Ok(()),
+      n => Err(n.into()),
     }
   }
 }
