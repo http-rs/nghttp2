@@ -39,14 +39,14 @@ look at some of these issues:
 
 [1]: https://img.shields.io/crates/v/nghttp2.svg?style=flat-square
 [2]: https://crates.io/crates/nghttp2
-[3]: https://img.shields.io/travis/rust-net-web/nghttp2/master.svg?style=flat-square
-[4]: https://travis-ci.org/rust-net-web/nghttp2
+[3]: https://img.shields.io/travis/http-rs/nghttp2/main.svg?style=flat-square
+[4]: https://travis-ci.org/http-rs/nghttp2
 [5]: https://img.shields.io/crates/d/nghttp2.svg?style=flat-square
 [6]: https://crates.io/crates/nghttp2
 [7]: https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square
 [8]: https://docs.rs/nghttp2
 
-[releases]: https://github.com/rust-net-web/nghttp2/releases
-[contributing]: https://github.com/rust-net-web/nghttp2/blob/master.github/CONTRIBUTING.md
-[good-first-issue]: https://github.com/rust-net-web/nghttp2/labels/good%20first%20issue
-[help-wanted]: https://github.com/rust-net-web/nghttp2/labels/help%20wanted
+[releases]: https://github.com/http-rs/nghttp2/releases
+[contributing]: https://github.com/http-rs/nghttp2/blob/main.github/CONTRIBUTING.md
+[good-first-issue]: https://github.com/http-rs/nghttp2/labels/good%20first%20issue
+[help-wanted]: https://github.com/http-rs/nghttp2/labels/help%20wanted
