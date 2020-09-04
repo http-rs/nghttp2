@@ -5,22 +5,22 @@ bitflags! {
   #[derive(Default)]
   pub struct FrameFlag: u32 {
     /// No flag set.
-    const None = libnghttp2_sys::NGHTTP2_FLAG_NONE;
+    const NONE = libnghttp2_sys::NGHTTP2_FLAG_NONE;
 
     /// The END_STREAM flag.
-    const EndStream = libnghttp2_sys::NGHTTP2_FLAG_END_STREAM;
+    const END_STREAM = libnghttp2_sys::NGHTTP2_FLAG_END_STREAM;
 
     /// The END_HEADERS flag.
-    const EndHeaders = libnghttp2_sys::NGHTTP2_FLAG_END_HEADERS;
+    const END_HEADERS = libnghttp2_sys::NGHTTP2_FLAG_END_HEADERS;
 
     /// The ACK flag
-    const Ack = libnghttp2_sys::NGHTTP2_FLAG_ACK;
+    const ACK = libnghttp2_sys::NGHTTP2_FLAG_ACK;
 
     /// The PADDED flag.
-    const Padded = libnghttp2_sys::NGHTTP2_FLAG_PADDED;
+    const PADDED = libnghttp2_sys::NGHTTP2_FLAG_PADDED;
 
     /// The PRIORITY flag.
-    const Priority = libnghttp2_sys::NGHTTP2_FLAG_PRIORITY;
+    const PRIORITY = libnghttp2_sys::NGHTTP2_FLAG_PRIORITY;
   }
 }
 
