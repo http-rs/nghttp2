@@ -171,7 +171,7 @@ impl Session {
     &mut self,
     settings: &[libnghttp2_sys::nghttp2_settings_entry],
   ) -> Result<(), Error> {
-    let flags = FrameFlag::None; // This is the only valid value.
+    let flags = FrameFlag::NONE; // This is the only valid value.
     let settings_len = settings.len();
     let settings_ptr = settings.as_ptr();
     let res = unsafe {
